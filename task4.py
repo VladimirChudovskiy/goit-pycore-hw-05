@@ -45,22 +45,24 @@ def main():
     print("📞 Phone Assistant Bot. Type 'exit' to quit.")
 
     while True:
-        command = input("Enter a command: ").strip().lower()
-        
+        user_input = input("Enter command: ").strip().lower().split()
+        if not user_input:
+            print("Unknown command. Available: add, change, phone, all, exit")
+            continue
+
+        command, *args = user_input
+
         if command in ["exit", "close", "quit"]:
             print("Good bye!")
             break
 
-        if command == "add":
-            args = input("Enter the name and phone: ").strip().split()
+        elif command == "add":
             print(add_contact(args, contacts))
 
         elif command == "change":
-            args = input("Enter the name and new phone: ").strip().split()
             print(change_contact(args, contacts))
 
         elif command == "phone":
-            args = input("Enter the name: ").strip().split()
             print(get_phone(args, contacts))
 
         elif command == "all":
